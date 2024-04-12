@@ -1,15 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import Layout from "../components/Layout/Layout";
 import MovieCard from "../components/Layout/MovieCard";
-import SearchContext from "../context/SearchContext";
 import SearchedMovies from "./SearchedMoviePage";
+import SearchContext from "../context/SearchContext";
 
 const PopularMovies = () => {
   const [popular, setPopular] = useState([]);
   const { search } = useContext(SearchContext);
-  console.log(search);
   const [page, setPage] = useState(1);
-
+  console.log(search);
   useEffect(() => {
     const fetchPopular = async () => {
       const data = await fetch(
@@ -20,7 +19,7 @@ const PopularMovies = () => {
     };
 
     fetchPopular();
-  }, [page]);
+  }, [page, search]);
 
   const Previous = () => {
     if (page !== 1) {

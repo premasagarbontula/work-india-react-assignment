@@ -16,7 +16,7 @@ const MovieCard = (props) => {
           />
           <h5 className="card-title text-center fs-5 movie-name">{title}</h5>
         </Link>
-        <p>Rating : {rating}</p>
+        <p className="text-white">Rating : {rating}</p>
       </div>
     </>
   );

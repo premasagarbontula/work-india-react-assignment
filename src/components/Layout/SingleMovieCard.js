@@ -10,7 +10,14 @@ const SingleMovieCard = (props) => {
     runtime,
     release_date,
     overview,
+    genres,
   } = props.details;
+  let genresNames = "";
+  if (genres !== undefined) {
+    for (let genre of genres) {
+      genresNames += genre.name + ", ";
+    }
+  }
 
   const rating = Math.round(vote_average * 10) / 10;
 
@@ -25,13 +32,15 @@ const SingleMovieCard = (props) => {
                 className="card-img-top pt-3 pb-0 px-3 w-25"
                 alt={`img${id}`}
               />
-              <div>
+              <div className="justify-content-end">
                 <h5 className="card-title text-center fs-3 single-movie-title  m-3">
                   {title}
                 </h5>
                 <p className="rating fs-4">Rating : {rating}</p>
-                <div>
-                  <p className="run-time fs-5">{runtime} min</p>
+
+                <div className="d-flex px-0">
+                  <p className="run-time fs-5 run-time">{runtime} min</p>
+                  <p className="run-time fs-5">{genresNames}</p>
                 </div>
                 <p className="run-time fs-5">Release Date : {release_date}</p>
               </div>

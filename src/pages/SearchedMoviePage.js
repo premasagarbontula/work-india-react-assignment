@@ -1,14 +1,11 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../components/Layout/Layout";
 import MovieCard from "../components/Layout/MovieCard";
-import SearchContext from "../context/SearchContext";
 
-const SearchedMovies = () => {
-  const { search } = useContext(SearchContext);
-  console.log(search);
+const SearchedMovies = (props) => {
+  const { search } = props;
   const [searchResults, setSearchResults] = useState([]);
   const [page, setPage] = useState(1);
-
   useEffect(() => {
     const fetchSearchResults = async () => {
       const data = await fetch(

@@ -1,8 +1,4 @@
 import React from "react";
-
-const SearchContext = React.createContext({
-  search: "",
-  setSearch: () => {},
-});
+const SearchContext = React.createContext();
 
 export default SearchContext;

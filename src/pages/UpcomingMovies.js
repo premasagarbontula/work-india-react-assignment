@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Layout from "../components/Layout/Layout";
 import MovieCard from "../components/Layout/MovieCard";
+import SearchedMovies from "./SearchedMoviePage";
+import SearchContext from "../context/SearchContext";
 
 const UpcomingMovies = () => {
   const [upcoming, setUpcoming] = useState([]);
+  const { search } = useContext(SearchContext);
   const [page, setPage] = useState(1);
   const fetchUpcoming = async () => {
     const data = await fetch(
@@ -30,33 +33,39 @@ const UpcomingMovies = () => {
     }
   };
   return (
-    <Layout>
-      <div className="container">
-        <div className="row py-5 my-5">
-          <div className="col-12 mt-2 mb-4 d-flex justify-content-center align-items-center">
-            <h4 className="fs-3 main-heading ">UPCOMING Movies</h4>
+    <>
+      {search.trim().length === 0 ? (
+        <Layout>
+          <div className="container">
+            <div className="row py-5 my-5">
+              <div className="col-12 mt-2 mb-4 d-flex justify-content-center align-items-center">
+                <h4 className="fs-3 main-heading ">UPCOMING Movies</h4>
+              </div>
+              {upcoming.length > 0 &&
+                upcoming.map((eachMovie) => (
+                  <MovieCard details={eachMovie} key={eachMovie.id} />
+                ))}
+            </div>
           </div>
-          {upcoming.length > 0 &&
-            upcoming.map((eachMovie) => (
-              <MovieCard details={eachMovie} key={eachMovie.id} />
-            ))}
-        </div>
-      </div>
-      <div className="d-flex justify-content-center align-items-center py-2">
-        <button
-          className="pagination-btn px-3 py-1 m-1 text-center "
-          onClick={Previous}
-        >
-          Previous
-        </button>
-        <button
-          className="pagination-btn px-3 py-1 m-1 text-center btn-primary"
-          onClick={Next}
-        >
-          Next
-        </button>
-      </div>
-    </Layout>
+          <div className="d-flex justify-content-center align-items-center py-2">
+            <button
+              className="pagination-btn px-3 py-1 m-1 text-center "
+              onClick={Previous}
+            >
+              Previous
+            </button>
+            <button
+              className="pagination-btn px-3 py-1 m-1 text-center btn-primary"
+              onClick={Next}
+            >
+              Next
+            </button>
+          </div>
+        </Layout>
+      ) : (
+        <SearchedMovies search={search} />
+      )}
+    </>
   );
 };
 

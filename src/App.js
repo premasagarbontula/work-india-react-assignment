@@ -4,11 +4,11 @@ import TopratedMovies from "./pages/TopratedMovies";
 import UpcomingMovies from "./pages/UpcomingMovies";
 import Pagenotfound from "./pages/PageNotFound";
 import SingleMovieDetailPage from "./pages/SingleMovieDetailPage";
+import { useState } from "react";
 import SearchContext from "./context/SearchContext";
-import { useContext } from "react";
 
 function App() {
-  const { search, setSearch } = useContext(SearchContext);
+  const [search, setSearch] = useState("");
   return (
     <>
       <SearchContext.Provider value={{ search, setSearch }}>

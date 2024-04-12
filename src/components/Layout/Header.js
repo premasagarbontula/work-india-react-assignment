@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { NavLink, Link } from "react-router-dom";
+import SearchContext from "../../context/SearchContext";
 
 const Header = () => {
-  const [search, setSearch] = useState("");
+  const { search, setSearch } = useContext(SearchContext);
+
   const Trigger = (e) => {
     setSearch(e.target.value);
   };
-  const onSearch = () => {
-    Trigger(search);
+  const onSearch = (e) => {
+    e.preventDefault();
   };
   return (
     <div>
@@ -52,6 +54,7 @@ const Header = () => {
                 type="search"
                 placeholder="Movie Name"
                 onChange={Trigger}
+                value={search}
               />
               <button
                 className="btn btn-outline-success search-btn"
